@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetroReader - Retro Gaming Reading Experience</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            .footer-links {
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #8a4fff 0%, #6a2fd4 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(145deg, #8a4fff, #6a2fd4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        /* Mini Retro Handheld Face in Logo - Matching Hero Icon */
+        .mini-face {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 26px;
+            height: 26px;
+        }
+        
+        .mini-eyes {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+        }
+        
+        .mini-eye {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #7a4aff;
+            border: 0.5px solid #000;
+            position: relative;
+        }
+        
+        .mini-eye::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 2.5px;
+            height: 2.5px;
+            background: #666;
+            border-radius: 50%;
+        }
+        
+        .mini-dpad {
+            position: absolute;
+            top: 11px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+        }
+        
+        .mini-dpad::before,
+        .mini-dpad::after {
+            content: '';
+            position: absolute;
+            background: #333;
+            border-radius: 0.5px;
+        }
+        
+        .mini-dpad::before {
+            width: 4px;
+            height: 1.5px;
+            top: 1.25px;
+            left: 0;
+        }
+        
+        .mini-dpad::after {
+            width: 1.5px;
+            height: 4px;
+            top: 0;
+            left: 1.25px;
+        }
+        
+        .mini-mouth {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 6px;
+            background: #1a3a4a;
+            border: 1px solid #333;
+            border-radius: 1px;
+            font-size: 4px;
+            color: #4a7a9a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #8a4fff 0%, #6a2fd4 50%, #4a1a8a 100%);
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 25px;
+            background: linear-gradient(145deg, #8a4fff, #6a2fd4);
+            margin: 0 auto 2rem;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Retro Handheld Face in Hero Icon */
+        .hero-face {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+        }
+        
+        .hero-eyes {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+        
+        .hero-eye {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #7a4aff;
+            border: 1px solid #000;
+            position: relative;
+        }
+        
+        .hero-eye::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: #666;
+            border-radius: 50%;
+        }
+        
+        .hero-dpad {
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+        }
+        
+        .hero-dpad::before,
+        .hero-dpad::after {
+            content: '';
+            position: absolute;
+            background: #333;
+            border-radius: 1px;
+        }
+        
+        .hero-dpad::before {
+            width: 12px;
+            height: 4px;
+            top: 4px;
+            left: 0;
+        }
+        
+        .hero-dpad::after {
+            width: 4px;
+            height: 12px;
+            top: 0;
+            left: 4px;
+        }
+        
+        .hero-mouth {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 20px;
+            background: #1a3a4a;
+            border: 2px solid #333;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7px;
+            color: #4a7a9a;
+            font-weight: bold;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, #e0e0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b9d, #ff8fab);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 157, 0.5);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #1a202c;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .feature-icon.retro {
+            background: linear-gradient(135deg, #8a4fff, #6a2fd4);
+        }
+        
+        .feature-icon.ai {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+        }
+        
+        .feature-icon.simple {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+        }
+        
+        .feature-icon.bookmark {
+            background: linear-gradient(135deg, #ff6b9d, #ff8fab);
+        }
+        
+        .feature-icon.share {
+            background: linear-gradient(135deg, #22d3ee, #0891b2);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+        
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.7;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 6rem 2rem;
+            background: white;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8a4fff, #6a2fd4);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .step h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+        
+        .step p {
+            color: #64748b;
+        }
+        
+        /* Demo Section */
+        .demo {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        }
+        
+        .demo-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* GameBoy Device Mockup */
+        .gameboy {
+            background: linear-gradient(145deg, #e8e8e8, #d0d0d0);
+            border-radius: 20px 20px 60px 20px;
+            padding: 2rem;
+            box-shadow: 
+                inset 0 2px 4px rgba(0,0,0,0.1),
+                0 20px 40px rgba(0,0,0,0.15);
+            width: 280px;
+            height: 420px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .gameboy::before {
+            content: 'RETRO';
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+            letter-spacing: 2px;
+        }
+
+        .gameboy::after {
+            content: 'READER';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+            letter-spacing: 2px;
+        }
+
+        /* Screen */
+        .screen-bezel {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 2rem 0;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        .screen {
+            background: #9bbc0f;
+            border-radius: 4px;
+            width: 180px;
+            height: 160px;
+            margin: 0 auto;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            line-height: 1.3;
+            padding: 1rem;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* Pixel effect overlay */
+        .screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 50%, rgba(0,0,0,0.03) 50%),
+                linear-gradient(rgba(0,0,0,0.03) 50%, transparent 50%);
+            background-size: 2px 2px;
+            pointer-events: none;
+        }
+
+        .screen-content {
+            color: #0f380f;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sentence-text {
+            background: rgba(15, 56, 15, 0.1);
+            padding: 0.5rem;
+            border-radius: 2px;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(15, 56, 15, 0.3);
+        }
+
+        .current-sentence {
+            background: rgba(15, 56, 15, 0.2);
+            border: 2px solid #0f380f;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+
+        .ui-elements {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            right: 8px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 8px;
+        }
+
+        .progress-bar {
+            width: 60px;
+            height: 4px;
+            background: rgba(15, 56, 15, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 2px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #0f380f;
+            border-radius: 2px;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 0 1rem;
+        }
+
+        .dpad {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+
+        .dpad-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(145deg, #666, #444);
+            border-radius: 3px;
+        }
+
+        .dpad-up, .dpad-down, .dpad-left, .dpad-right {
+            position: absolute;
+            background: linear-gradient(145deg, #666, #444);
+            border-radius: 2px;
+        }
+
+        .dpad-up, .dpad-down {
+            width: 20px;
+            height: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .dpad-up { top: 0; }
+        .dpad-down { bottom: 0; }
+
+        .dpad-left, .dpad-right {
+            width: 15px;
+            height: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .dpad-left { left: 0; }
+        .dpad-right { right: 0; }
+
+        .btn-a, .btn-b {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #8a4fff, #6a2fd4);
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .btn-b {
+            background: linear-gradient(145deg, #ff6b9d, #d946a0);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .screenshot-label {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: #1a202c;
+            font-size: 1.1rem;
+        }
+
+        .screenshot-description {
+            margin-top: 0.5rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .bookmark-icon {
+            color: #0f380f;
+            font-size: 8px;
+            margin-left: 4px;
+        }
+
+        .menu-item {
+            padding: 2px 4px;
+            margin: 1px 0;
+            border-radius: 1px;
+        }
+
+        .menu-item.selected {
+            background: rgba(15, 56, 15, 0.2);
+            border: 1px solid #0f380f;
+        }
+
+        @media (max-width: 768px) {
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .gameboy {
+                width: 260px;
+                height: 400px;
+            }
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="mini-face">
+                        <div class="mini-eyes">
+                            <div class="mini-eye"></div>
+                            <div class="mini-eye"></div>
+                        </div>
+                        <div class="mini-dpad"></div>
+                        <div class="mini-mouth">R</div>
+                    </div>
+                </div>
+                <span>RetroReader</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#download">Download</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-icon">
+                <div class="hero-face">
+                    <div class="hero-eyes">
+                        <div class="hero-eye"></div>
+                        <div class="hero-eye"></div>
+                    </div>
+                    <div class="hero-dpad"></div>
+                    <div class="hero-mouth">READ</div>
+                </div>
+            </div>
+            <h1>RetroReader</h1>
+            <p>Experience reading like a classic handheld game. Navigate sentence by sentence, bookmark your favorites, and share quotes with retro pixel charm.</p>
+            <div class="cta-buttons">
+                <a href="#download" class="btn btn-primary">Download Now</a>
+                <a href="#demo" class="btn btn-secondary">See Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why RetroReader?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon retro">🎮</div>
+                    <h3>Authentic Retro Gaming</h3>
+                    <p>Immerse yourself in a genuine retro handheld reading experience. Navigate with A button, see pixel-perfect UI, and feel the 90s nostalgia.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon ai">📖</div>
+                    <h3>Sentence-by-Sentence Focus</h3>
+                    <p>Read at your own pace, one sentence at a time. Perfect for concentration, language learning, and deep comprehension.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon bookmark">⭐</div>
+                    <h3>Smart Bookmarks</h3>
+                    <p>Never lose your place or favorite quotes. Bookmark any sentence instantly and build your personal collection of memorable passages.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon share">📸</div>
+                    <h3>Share as Images</h3>
+                    <p>Transform inspiring sentences into beautiful retro-styled quote images. Perfect for social media, study notes, or sharing wisdom with friends.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Load Your Document</h3>
+                    <p>Import any text file or PDF. RetroReader converts it into the perfect sentence-by-sentence format.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Navigate Like a Game</h3>
+                    <p>Use the classic A button to advance through sentences. B button to go back. Pure retro handheld nostalgia!</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Bookmark & Share</h3>
+                    <p>Found an inspiring sentence? Bookmark it for later or share it as a beautiful retro-styled image.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo" id="demo">
+        <div class="demo-content">
+            <h2 class="section-title">See RetroReader in Action</h2>
+            <p style="font-size: 1.2rem; color: #64748b; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">Experience reading like a classic handheld game. Navigate sentence by sentence with authentic retro gaming charm.</p>
+
+            <div class="screenshots-grid">
+                <!-- Main Reading Screen -->
+                <div class="screenshot">
+                    <div class="gameboy">
+                        <div class="screen-bezel">
+                            <div class="screen reading">
+                                <div class="screen-content">
+                                    <div class="sentence-text current-sentence">
+                                        The quick brown fox jumps over the lazy dog.
+                                    </div>
+                                    <div class="sentence-text">
+                                        This sentence contains every letter of the alphabet.
+                                    </div>
+                                    <div class="sentence-text">
+                                        It's commonly used for typing practice.
+                                    </div>
+                                    <div class="ui-elements">
+                                        <span>12/47</span>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 25%;"></div>
+                                        </div>
+                                        <span>⭐</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="controls">
+                            <div class="dpad">
+                                <div class="dpad-up"></div>
+                                <div class="dpad-down"></div>
+                                <div class="dpad-left"></div>
+                                <div class="dpad-right"></div>
+                                <div class="dpad-center"></div>
+                            </div>
+                            <div class="buttons">
+                                <div class="btn-b">B</div>
+                                <div class="btn-a">A</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Reading Mode</div>
+                    <div class="screenshot-description">Navigate sentence by sentence with the A button. Current sentence is highlighted for focus.</div>
+                </div>
+
+                <!-- Bookmarks Screen -->
+                <div class="screenshot">
+                    <div class="gameboy">
+                        <div class="screen-bezel">
+                            <div class="screen bookmarks">
+                                <div class="screen-content">
+                                    <div style="text-align: center; font-weight: bold; margin-bottom: 8px;">BOOKMARKS</div>
+                                    <div class="sentence-text current-sentence">
+                                        "To be or not to be..." <span class="bookmark-icon">⭐</span>
+                                    </div>
+                                    <div class="sentence-text">
+                                        "It was the best of times..." <span class="bookmark-icon">⭐</span>
+                                    </div>
+                                    <div class="sentence-text">
+                                        "In the beginning was..." <span class="bookmark-icon">⭐</span>
+                                    </div>
+                                    <div class="ui-elements">
+                                        <span>3 saved</span>
+                                        <span></span>
+                                        <span>SHARE</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="controls">
+                            <div class="dpad">
+                                <div class="dpad-up"></div>
+                                <div class="dpad-down"></div>
+                                <div class="dpad-left"></div>
+                                <div class="dpad-right"></div>
+                                <div class="dpad-center"></div>
+                            </div>
+                            <div class="buttons">
+                                <div class="btn-b">B</div>
+                                <div class="btn-a">A</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Bookmarks</div>
+                    <div class="screenshot-description">Save your favorite sentences and quotes. Access them anytime or share as beautiful images.</div>
+                </div>
+
+                <!-- Menu Screen -->
+                <div class="screenshot">
+                    <div class="gameboy">
+                        <div class="screen-bezel">
+                            <div class="screen menu">
+                                <div class="screen-content">
+                                    <div style="text-align: center; font-weight: bold; margin-bottom: 8px;">MAIN MENU</div>
+                                    <div class="menu-item selected">📖 Continue Reading</div>
+                                    <div class="menu-item">📁 Load Document</div>
+                                    <div class="menu-item">⭐ Bookmarks</div>
+                                    <div class="menu-item">📸 Share Quote</div>
+                                    <div class="menu-item">⚙️ Settings</div>
+                                    <div class="menu-item">❓ Help</div>
+                                    <div class="ui-elements">
+                                        <span>SELECT</span>
+                                        <span></span>
+                                        <span>START</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="controls">
+                            <div class="dpad">
+                                <div class="dpad-up"></div>
+                                <div class="dpad-down"></div>
+                                <div class="dpad-left"></div>
+                                <div class="dpad-right"></div>
+                                <div class="dpad-center"></div>
+                            </div>
+                            <div class="buttons">
+                                <div class="btn-b">B</div>
+                                <div class="btn-a">A</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Main Menu</div>
+                    <div class="screenshot-description">Access all features from the classic game-style menu. Load documents, view bookmarks, and adjust settings.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="demo" id="download">
+        <div class="demo-content">
+            <h2 class="section-title">Download RetroReader</h2>
+            <p>Available for iOS. Experience reading like never before with authentic retro handheld nostalgia!</p>
+            <div class="cta-buttons" style="margin-top: 2rem;">
+                <a href="#" class="btn btn-primary">📱 Download on App Store</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-icon">
+                    <div class="mini-face">
+                        <div class="mini-eyes">
+                            <div class="mini-eye"></div>
+                            <div class="mini-eye"></div>
+                        </div>
+                        <div class="mini-dpad"></div>
+                        <div class="mini-mouth">R</div>
+                    </div>
+                </div>
+                <span>RetroReader</span>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#support">Support</a>
+                <a href="#contact">Contact</a>
+            </div>
+            
+            <p>&copy; 2025 RetroReader. Reading reinvented with authentic retro gaming charm.</p>
+        </div>
+    </footer>
+</body>
+</html>
