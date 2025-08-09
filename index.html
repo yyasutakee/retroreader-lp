@@ -484,7 +484,7 @@
         
         /* Demo Section */
         .demo {
-            padding: 6rem 2rem;
+            padding: 6rem 2rem 8rem 2rem;
             background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
         }
         
@@ -494,6 +494,271 @@
             text-align: center;
         }
         
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .screenshot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .screenshot-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin: 1rem 0;
+            height: 400px;
+        }
+
+        .app-screenshot {
+            max-width: 250px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .app-screenshot:hover {
+            transform: scale(1.05);
+        }
+
+        /* GameBoy Device Mockup */
+        .gameboy {
+            background: linear-gradient(145deg, #e8e8e8, #d0d0d0);
+            border-radius: 20px 20px 60px 20px;
+            padding: 2rem;
+            box-shadow: 
+                inset 0 2px 4px rgba(0,0,0,0.1),
+                0 20px 40px rgba(0,0,0,0.15);
+            width: 280px;
+            height: 420px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .gameboy::before {
+            content: 'RETRO';
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+            letter-spacing: 2px;
+        }
+
+        .gameboy::after {
+            content: 'READER';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+            letter-spacing: 2px;
+        }
+
+        /* Screen */
+        .screen-bezel {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 2rem 0;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        .screen {
+            background: #9bbc0f;
+            border-radius: 4px;
+            width: 180px;
+            height: 160px;
+            margin: 0 auto;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            line-height: 1.3;
+            padding: 1rem;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* Pixel effect overlay */
+        .screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 50%, rgba(0,0,0,0.03) 50%),
+                linear-gradient(rgba(0,0,0,0.03) 50%, transparent 50%);
+            background-size: 2px 2px;
+            pointer-events: none;
+        }
+
+        .screen-content {
+            color: #0f380f;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sentence-text {
+            background: rgba(15, 56, 15, 0.1);
+            padding: 0.5rem;
+            border-radius: 2px;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(15, 56, 15, 0.3);
+        }
+
+        .current-sentence {
+            background: rgba(15, 56, 15, 0.2);
+            border: 2px solid #0f380f;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+
+        .ui-elements {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            right: 8px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 8px;
+        }
+
+        .progress-bar {
+            width: 60px;
+            height: 4px;
+            background: rgba(15, 56, 15, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 2px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #0f380f;
+            border-radius: 2px;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 0 1rem;
+        }
+
+        .dpad {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+
+        .dpad-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(145deg, #666, #444);
+            border-radius: 3px;
+        }
+
+        .dpad-up, .dpad-down, .dpad-left, .dpad-right {
+            position: absolute;
+            background: linear-gradient(145deg, #666, #444);
+            border-radius: 2px;
+        }
+
+        .dpad-up, .dpad-down {
+            width: 20px;
+            height: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .dpad-up { top: 0; }
+        .dpad-down { bottom: 0; }
+
+        .dpad-left, .dpad-right {
+            width: 15px;
+            height: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .dpad-left { left: 0; }
+        .dpad-right { right: 0; }
+
+        .btn-a, .btn-b {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #8a4fff, #6a2fd4);
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .btn-b {
+            background: linear-gradient(145deg, #ff6b9d, #d946a0);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .screenshot-label {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: #1a202c;
+            font-size: 1.1rem;
+        }
+
+        .screenshot-description {
+            margin-top: 0.5rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .bookmark-icon {
+            color: #0f380f;
+            font-size: 8px;
+            margin-left: 4px;
+        }
+
+        .menu-item {
+            padding: 2px 4px;
+            margin: 1px 0;
+            border-radius: 1px;
+        }
+
+        .menu-item.selected {
+            background: rgba(15, 56, 15, 0.2);
+            border: 1px solid #0f380f;
+        }
+
+        /* Interactive Demo Styles */
         .demo-screen {
             background: #1a202c;
             border-radius: 20px;
@@ -501,8 +766,9 @@
             margin: 2rem auto;
             box-shadow: 0 20px 50px rgba(0,0,0,0.2);
             max-width: 600px;
+            position: relative;
         }
-        
+
         .demo-text {
             background: #2d3748;
             color: #e2e8f0;
@@ -513,23 +779,94 @@
             line-height: 1.8;
             text-align: left;
             position: relative;
+            min-height: 150px;
         }
-        
-        .sentence-highlight {
-            background: rgba(138, 79, 255, 0.3);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            border-left: 3px solid #8a4fff;
+
+        .current-sentence {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            opacity: 1;
+            animation: fadeIn 0.5s ease-in-out;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
         }
-        
-        .ai-response {
-            background: rgba(74, 222, 128, 0.1);
-            border: 1px solid rgba(74, 222, 128, 0.3);
-            padding: 1rem;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .demo-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .demo-btn {
+            background: rgba(138, 79, 255, 0.8);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
             border-radius: 8px;
+            font-family: monospace;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .demo-btn:hover {
+            background: rgba(138, 79, 255, 1);
+        }
+
+        .demo-btn.active {
+            background: #8a4fff;
+            box-shadow: 0 0 10px rgba(138, 79, 255, 0.5);
+        }
+
+        .demo-description {
+            margin-top: 2rem;
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .keyboard-hint {
             margin-top: 1rem;
             font-size: 0.9rem;
-            color: #4ade80;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .gameboy {
+                width: 260px;
+                height: 400px;
+            }
+
+            .demo-screen {
+                padding: 1rem;
+            }
+            
+            .demo-text {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+            
+            .demo-controls {
+                gap: 0.5rem;
+            }
+            
+            .demo-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
         }
         
         /* Footer */
@@ -617,7 +954,6 @@
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#demo">Demo</a></li>
                 <li><a href="#download">Download</a></li>
             </ul>
         </nav>
@@ -640,7 +976,6 @@
             <p>Experience reading like a classic handheld game. Navigate sentence by sentence, bookmark your favorites, and share quotes with retro pixel charm.</p>
             <div class="cta-buttons">
                 <a href="#download" class="btn btn-primary">Download Now</a>
-                <a href="#demo" class="btn btn-secondary">See Demo</a>
             </div>
         </div>
     </section>
@@ -664,11 +999,6 @@
                     <div class="feature-icon bookmark">⭐</div>
                     <h3>Smart Bookmarks</h3>
                     <p>Never lose your place or favorite quotes. Bookmark any sentence instantly and build your personal collection of memorable passages.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon share">📸</div>
-                    <h3>Share as Images</h3>
-                    <p>Transform inspiring sentences into beautiful retro-styled quote images. Perfect for social media, study notes, or sharing wisdom with friends.</p>
                 </div>
             </div>
         </div>
@@ -703,15 +1033,19 @@
         <div class="demo-content">
             <h2 class="section-title">See RetroReader in Action</h2>
             <div class="demo-screen">
-                <div class="demo-text">
-                    The quick brown fox jumps over the lazy dog. <span class="sentence-highlight">This sentence contains every letter of the alphabet.</span> It's commonly used for typing practice and font testing.
-                    
-                    <div class="ai-response">
-                        <strong>📖 Bookmarked!</strong> This sentence has been saved to your favorites. Tap the share button to create a retro-styled image perfect for social media!
-                    </div>
+                <div class="demo-text" id="demoText">
+                    <div class="current-sentence" id="currentSentence">The quick brown fox jumps over the lazy dog.</div>
+                </div>
+                
+                <div class="demo-controls">
+                    <button class="demo-btn" id="pauseBtn">⏸️ PAUSE</button>
+                    <button class="demo-btn" id="prevBtn">⬅️ B</button>
+                    <button class="demo-btn" id="nextBtn">➡️ A</button>
+                    <button class="demo-btn" id="restartBtn">🔄 RESTART</button>
                 </div>
             </div>
-            <p>Navigate sentence by sentence with A/B buttons, bookmark favorites, and share beautiful quotes!</p>
+            <p class="demo-description">Navigate sentence by sentence with A/B buttons, just like a classic retro handheld!</p>
+            <p class="keyboard-hint">💡 Try keyboard controls: A/→ (next), B/← (back), Space (pause), R (restart)</p>
         </div>
     </section>
 
@@ -753,5 +1087,152 @@
             <p>&copy; 2025 RetroReader. Reading reinvented with authentic retro gaming charm.</p>
         </div>
     </footer>
+
+    <script>
+        class RetroReaderDemo {
+            constructor() {
+                this.sentences = [
+                    "The quick brown fox jumps over the lazy dog.",
+                    "This sentence contains every letter of the alphabet.",
+                    "It's commonly used for typing practice and font testing.",
+                    "RetroReader makes reading this passage an engaging experience.",
+                    "Navigate sentence by sentence with perfect retro gaming nostalgia!",
+                    "Experience the joy of focused, deliberate reading.",
+                    "Each sentence becomes a moment of discovery.",
+                    "Welcome to the future of mindful reading!"
+                ];
+                
+                this.currentSentence = 0;
+                this.isPlaying = true;
+                this.interval = null;
+                this.intervalDuration = 3000; // 3 seconds
+                
+                this.currentSentenceEl = document.getElementById('currentSentence');
+                
+                this.pauseBtn = document.getElementById('pauseBtn');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.restartBtn = document.getElementById('restartBtn');
+                
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.startDemo();
+            }
+            
+            setupEventListeners() {
+                this.pauseBtn.addEventListener('click', () => this.togglePause());
+                this.prevBtn.addEventListener('click', () => this.previousSentence());
+                this.nextBtn.addEventListener('click', () => this.nextSentence());
+                this.restartBtn.addEventListener('click', () => this.restart());
+                
+                // Add keyboard controls for authentic retro feel
+                document.addEventListener('keydown', (e) => {
+                    switch(e.code) {
+                        case 'KeyA':
+                        case 'ArrowRight':
+                            e.preventDefault();
+                            this.nextSentence();
+                            break;
+                        case 'KeyB':
+                        case 'ArrowLeft':
+                            e.preventDefault();
+                            this.previousSentence();
+                            break;
+                        case 'Space':
+                            e.preventDefault();
+                            this.togglePause();
+                            break;
+                        case 'KeyR':
+                            e.preventDefault();
+                            this.restart();
+                            break;
+                    }
+                });
+            }
+            
+            startDemo() {
+                this.updateDisplay();
+                this.startInterval();
+            }
+            
+            startInterval() {
+                if (this.interval) clearInterval(this.interval);
+                
+                if (!this.isPlaying) return;
+                
+                this.interval = setInterval(() => {
+                    this.nextSentence();
+                }, this.intervalDuration);
+            }
+            
+            stopInterval() {
+                if (this.interval) {
+                    clearInterval(this.interval);
+                    this.interval = null;
+                }
+            }
+            
+            nextSentence() {
+                this.currentSentence = (this.currentSentence + 1) % this.sentences.length;
+                this.updateDisplay();
+                if (this.isPlaying) {
+                    this.startInterval();
+                }
+            }
+            
+            previousSentence() {
+                this.currentSentence = this.currentSentence > 0 ? this.currentSentence - 1 : this.sentences.length - 1;
+                this.updateDisplay();
+                if (this.isPlaying) {
+                    this.startInterval();
+                }
+            }
+            
+            updateDisplay() {
+                // Update the current sentence text with fade animation
+                this.currentSentenceEl.style.opacity = '0';
+                
+                setTimeout(() => {
+                    this.currentSentenceEl.textContent = this.sentences[this.currentSentence];
+                    this.currentSentenceEl.style.opacity = '1';
+                }, 250);
+                
+                // Add button press effect
+                this.nextBtn.classList.add('active');
+                setTimeout(() => this.nextBtn.classList.remove('active'), 200);
+            }
+            
+            togglePause() {
+                this.isPlaying = !this.isPlaying;
+                this.pauseBtn.textContent = this.isPlaying ? '⏸️ PAUSE' : '▶️ PLAY';
+                
+                if (this.isPlaying) {
+                    this.startInterval();
+                } else {
+                    this.stopInterval();
+                }
+            }
+            
+            restart() {
+                this.currentSentence = 0;
+                this.isPlaying = true;
+                this.pauseBtn.textContent = '⏸️ PAUSE';
+                this.updateDisplay();
+                this.startInterval();
+                
+                // Add restart button effect
+                this.restartBtn.classList.add('active');
+                setTimeout(() => this.restartBtn.classList.remove('active'), 200);
+            }
+        }
+        
+        // Initialize the demo when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new RetroReaderDemo();
+        });
+    </script>
 </body>
 </html>
