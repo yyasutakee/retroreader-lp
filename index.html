@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RetroReader - Retro Gaming Reading Experience</title>
-    <link rel="icon" type="image/png" href="app_icon.png">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            .footer-links {
+                justify-content: center;
+                gap: 1rem;
+            }
         }
         
         body {
@@ -59,16 +62,19 @@
             position: relative;
         }
         
-        /* Mini Game Boy Face in Logo */
+        /* Mini Retro Handheld Face in Logo - Matching Hero Icon */
         .mini-face {
-            position: relative;
-            width: 100%;
-            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 26px;
+            height: 26px;
         }
         
         .mini-eyes {
             position: absolute;
-            top: 8px;
+            top: 5px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -79,17 +85,30 @@
             width: 4px;
             height: 4px;
             border-radius: 50%;
-            background: #fff;
-            border: 0.5px solid #333;
+            background: #7a4aff;
+            border: 0.5px solid #000;
+            position: relative;
+        }
+        
+        .mini-eye::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 2.5px;
+            height: 2.5px;
+            background: #666;
+            border-radius: 50%;
         }
         
         .mini-dpad {
             position: absolute;
-            top: 16px;
+            top: 11px;
             left: 50%;
             transform: translateX(-50%);
-            width: 6px;
-            height: 6px;
+            width: 4px;
+            height: 4px;
         }
         
         .mini-dpad::before,
@@ -97,25 +116,26 @@
             content: '';
             position: absolute;
             background: #333;
+            border-radius: 0.5px;
         }
         
         .mini-dpad::before {
-            width: 6px;
-            height: 2px;
-            top: 2px;
+            width: 4px;
+            height: 1.5px;
+            top: 1.25px;
             left: 0;
         }
         
         .mini-dpad::after {
-            width: 2px;
-            height: 6px;
+            width: 1.5px;
+            height: 4px;
             top: 0;
-            left: 2px;
+            left: 1.25px;
         }
         
         .mini-mouth {
             position: absolute;
-            top: 22px;
+            top: 16px;
             left: 50%;
             transform: translateX(-50%);
             width: 16px;
@@ -128,6 +148,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: bold;
         }
         
         .nav-links {
@@ -190,7 +211,7 @@
             50% { transform: translateY(-10px); }
         }
         
-        /* Game Boy Face in Hero Icon */
+        /* Retro Handheld Face in Hero Icon */
         .hero-face {
             position: absolute;
             top: 50%;
@@ -524,6 +545,25 @@
             margin: 0 auto;
         }
         
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
         .footer-logo {
             display: flex;
             align-items: center;
@@ -597,7 +637,7 @@
                 </div>
             </div>
             <h1>RetroReader</h1>
-            <p>Experience reading like a classic Game Boy game. Navigate sentence by sentence, bookmark your favorites, and share quotes with retro pixel charm.</p>
+            <p>Experience reading like a classic handheld game. Navigate sentence by sentence, bookmark your favorites, and share quotes with retro pixel charm.</p>
             <div class="cta-buttons">
                 <a href="#download" class="btn btn-primary">Download Now</a>
                 <a href="#demo" class="btn btn-secondary">See Demo</a>
@@ -613,7 +653,7 @@
                 <div class="feature-card">
                     <div class="feature-icon retro">🎮</div>
                     <h3>Authentic Retro Gaming</h3>
-                    <p>Immerse yourself in a genuine Game Boy reading experience. Navigate with A button, see pixel-perfect UI, and feel the 90s nostalgia.</p>
+                    <p>Immerse yourself in a genuine retro handheld reading experience. Navigate with A button, see pixel-perfect UI, and feel the 90s nostalgia.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon ai">📖</div>
@@ -647,7 +687,7 @@
                 <div class="step">
                     <div class="step-number">2</div>
                     <h3>Navigate Like a Game</h3>
-                    <p>Use the classic A button to advance through sentences. B button to go back. Pure Game Boy nostalgia!</p>
+                    <p>Use the classic A button to advance through sentences. B button to go back. Pure retro handheld nostalgia!</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
@@ -679,10 +719,9 @@
     <section class="demo" id="download">
         <div class="demo-content">
             <h2 class="section-title">Download RetroReader</h2>
-            <p>Available for iOS and Android. Experience reading like never before with authentic Game Boy nostalgia!</p>
+            <p>Available for iOS. Experience reading like never before with authentic retro handheld nostalgia!</p>
             <div class="cta-buttons" style="margin-top: 2rem;">
-                <a href="#" class="btn btn-primary">📱 App Store</a>
-                <a href="#" class="btn btn-primary">🤖 Google Play</a>
+                <a href="#" class="btn btn-primary">📱 Download on App Store</a>
             </div>
         </div>
     </section>
@@ -703,6 +742,14 @@
                 </div>
                 <span>RetroReader</span>
             </div>
+            
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#support">Support</a>
+                <a href="#contact">Contact</a>
+            </div>
+            
             <p>&copy; 2025 RetroReader. Reading reinvented with authentic retro gaming charm.</p>
         </div>
     </footer>
